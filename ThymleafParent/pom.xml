@@ -11,7 +11,6 @@
 	<groupId>com.fogcoding</groupId>
 	<artifactId>boot-web-thymeleaf</artifactId>
 	<version>1.0</version>
-	<name>fogcoding-boot-web-thymeleaf</name>
 	<description>Thymeleaf-parent-project</description>
 
 	<properties>
