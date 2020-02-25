@@ -5,7 +5,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-@MapperScan(value = "com.fogcoding.mapper.example")
+@MapperScan(value = "com.fogcoding.mapper")
 public class Application {
 
     public static void main(String[] args) {
@@ -13,7 +13,6 @@ public class Application {
         SpringApplication.run(Application.class, args);
 
     }
-
 
 
 

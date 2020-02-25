@@ -79,4 +79,15 @@ public class User {
         this.authority_level = authority_level;
     }
 
+    @Override
+    public String toString() {
+        return "User{" +
+                "_id=" + _id +
+                ", _account='" + _account + '\'' +
+                ", passwd='" + passwd + '\'' +
+                ", _name='" + _name + '\'' +
+                ", user_group='" + user_group + '\'' +
+                ", authority_level=" + authority_level +
+                '}';
+    }
 }

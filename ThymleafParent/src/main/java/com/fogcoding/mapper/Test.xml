@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.fogcoding.mapper.example">
+<mapper namespace="com.fogcoding.mapper.Test">
 
-
-    <select id="selectAll" resultType="com.fogcoding.model.User">
-        select * from users where _id = 4
+    <select id="All1" resultType="com.fogcoding.model.User">
+        SELECT * from users where _id = 4
     </select>
 
 </mapper>

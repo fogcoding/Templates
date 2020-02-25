@@ -1,6 +1,6 @@
 package com.fogcoding.controller;
 
-import com.fogcoding.mapper.example;
+import com.fogcoding.mapper.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,11 +12,11 @@ import javax.servlet.http.HttpServletRequest;
 public class ThymeleafController {
 
     @Autowired
-    private example example;
+    private Test example;
 
     @GetMapping("/thymeleaf")
     public String hello(HttpServletRequest request, @RequestParam(value = "description", required = false, defaultValue = "springboot-thymeleaf") String description) {
-        request.setAttribute("description", example.selectAll().toString());
+        request.setAttribute("description", example.All1().toString());
         return "thymeleaf";
     }
 
