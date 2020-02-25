@@ -15,8 +15,8 @@ public class ThymeleafController {
     private Test example;
 
     @GetMapping("/thymeleaf")
-    public String hello(HttpServletRequest request, @RequestParam(value = "description", required = false, defaultValue = "springboot-thymeleaf") String description) {
-        request.setAttribute("description", example.All1().toString());
+    public String hello(HttpServletRequest request, @RequestParam(value = "_id", required = false, defaultValue = "4") int _id) {
+        request.setAttribute("description", example.All1(_id).toString());
         return "thymeleaf";
     }
 
