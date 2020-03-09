@@ -3,7 +3,7 @@
 <mapper namespace="com.fogcoding.mapper.Test">
 
     <select id="All1" resultType="com.fogcoding.model.User">
-        SELECT * from users where _id = #{_id}
+        SELECT _id from user where _id = #{_id}
     </select>
 
 </mapper>
