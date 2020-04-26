@@ -16,7 +16,7 @@ public class Application {
         System.out.println("启动 Spring Boot...");
         SpringApplication.run(Application.class, args);
         
-        //为了体现修改而添加的输出语句
+        //为了体现修改而添加的输出语句信息
         System.out.println("这里输出了一点什么");
 
     }
