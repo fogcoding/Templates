@@ -1,0 +1,304 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fogcoding.mybatis.dao.test_envMapper">
+  <resultMap id="BaseResultMap" type="com.fogcoding.mybatis.model.test_env">
+    <id column="_id" jdbcType="INTEGER" property="id" />
+    <result column="type" jdbcType="VARCHAR" property="type" />
+    <result column="system" jdbcType="VARCHAR" property="system" />
+    <result column="pm" jdbcType="VARCHAR" property="pm" />
+    <result column="hostaddr" jdbcType="VARCHAR" property="hostaddr" />
+    <result column="hostuser" jdbcType="VARCHAR" property="hostuser" />
+    <result column="dbaddr" jdbcType="VARCHAR" property="dbaddr" />
+    <result column="dbuser" jdbcType="VARCHAR" property="dbuser" />
+    <result column="url" jdbcType="VARCHAR" property="url" />
+    <result column="webuser" jdbcType="VARCHAR" property="webuser" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    _id, type, system, pm, hostaddr, hostuser, dbaddr, dbuser, url, webuser
+  </sql>
+  <select id="selectByExample" parameterType="com.fogcoding.mybatis.model.test_envExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from test_env
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from test_env
+    where _id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from test_env
+    where _id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.fogcoding.mybatis.model.test_envExample">
+    delete from test_env
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.fogcoding.mybatis.model.test_env">
+    insert into test_env (_id, type, system, 
+      pm, hostaddr, hostuser, 
+      dbaddr, dbuser, url, 
+      webuser)
+    values (#{id,jdbcType=INTEGER}, #{type,jdbcType=VARCHAR}, #{system,jdbcType=VARCHAR}, 
+      #{pm,jdbcType=VARCHAR}, #{hostaddr,jdbcType=VARCHAR}, #{hostuser,jdbcType=VARCHAR}, 
+      #{dbaddr,jdbcType=VARCHAR}, #{dbuser,jdbcType=VARCHAR}, #{url,jdbcType=VARCHAR}, 
+      #{webuser,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.fogcoding.mybatis.model.test_env">
+    insert into test_env
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        _id,
+      </if>
+      <if test="type != null">
+        type,
+      </if>
+      <if test="system != null">
+        system,
+      </if>
+      <if test="pm != null">
+        pm,
+      </if>
+      <if test="hostaddr != null">
+        hostaddr,
+      </if>
+      <if test="hostuser != null">
+        hostuser,
+      </if>
+      <if test="dbaddr != null">
+        dbaddr,
+      </if>
+      <if test="dbuser != null">
+        dbuser,
+      </if>
+      <if test="url != null">
+        url,
+      </if>
+      <if test="webuser != null">
+        webuser,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="system != null">
+        #{system,jdbcType=VARCHAR},
+      </if>
+      <if test="pm != null">
+        #{pm,jdbcType=VARCHAR},
+      </if>
+      <if test="hostaddr != null">
+        #{hostaddr,jdbcType=VARCHAR},
+      </if>
+      <if test="hostuser != null">
+        #{hostuser,jdbcType=VARCHAR},
+      </if>
+      <if test="dbaddr != null">
+        #{dbaddr,jdbcType=VARCHAR},
+      </if>
+      <if test="dbuser != null">
+        #{dbuser,jdbcType=VARCHAR},
+      </if>
+      <if test="url != null">
+        #{url,jdbcType=VARCHAR},
+      </if>
+      <if test="webuser != null">
+        #{webuser,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.fogcoding.mybatis.model.test_envExample" resultType="java.lang.Long">
+    select count(*) from test_env
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update test_env
+    <set>
+      <if test="record.id != null">
+        _id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.type != null">
+        type = #{record.type,jdbcType=VARCHAR},
+      </if>
+      <if test="record.system != null">
+        system = #{record.system,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pm != null">
+        pm = #{record.pm,jdbcType=VARCHAR},
+      </if>
+      <if test="record.hostaddr != null">
+        hostaddr = #{record.hostaddr,jdbcType=VARCHAR},
+      </if>
+      <if test="record.hostuser != null">
+        hostuser = #{record.hostuser,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dbaddr != null">
+        dbaddr = #{record.dbaddr,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dbuser != null">
+        dbuser = #{record.dbuser,jdbcType=VARCHAR},
+      </if>
+      <if test="record.url != null">
+        url = #{record.url,jdbcType=VARCHAR},
+      </if>
+      <if test="record.webuser != null">
+        webuser = #{record.webuser,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update test_env
+    set _id = #{record.id,jdbcType=INTEGER},
+      type = #{record.type,jdbcType=VARCHAR},
+      system = #{record.system,jdbcType=VARCHAR},
+      pm = #{record.pm,jdbcType=VARCHAR},
+      hostaddr = #{record.hostaddr,jdbcType=VARCHAR},
+      hostuser = #{record.hostuser,jdbcType=VARCHAR},
+      dbaddr = #{record.dbaddr,jdbcType=VARCHAR},
+      dbuser = #{record.dbuser,jdbcType=VARCHAR},
+      url = #{record.url,jdbcType=VARCHAR},
+      webuser = #{record.webuser,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.fogcoding.mybatis.model.test_env">
+    update test_env
+    <set>
+      <if test="type != null">
+        type = #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="system != null">
+        system = #{system,jdbcType=VARCHAR},
+      </if>
+      <if test="pm != null">
+        pm = #{pm,jdbcType=VARCHAR},
+      </if>
+      <if test="hostaddr != null">
+        hostaddr = #{hostaddr,jdbcType=VARCHAR},
+      </if>
+      <if test="hostuser != null">
+        hostuser = #{hostuser,jdbcType=VARCHAR},
+      </if>
+      <if test="dbaddr != null">
+        dbaddr = #{dbaddr,jdbcType=VARCHAR},
+      </if>
+      <if test="dbuser != null">
+        dbuser = #{dbuser,jdbcType=VARCHAR},
+      </if>
+      <if test="url != null">
+        url = #{url,jdbcType=VARCHAR},
+      </if>
+      <if test="webuser != null">
+        webuser = #{webuser,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where _id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.fogcoding.mybatis.model.test_env">
+    update test_env
+    set type = #{type,jdbcType=VARCHAR},
+      system = #{system,jdbcType=VARCHAR},
+      pm = #{pm,jdbcType=VARCHAR},
+      hostaddr = #{hostaddr,jdbcType=VARCHAR},
+      hostuser = #{hostuser,jdbcType=VARCHAR},
+      dbaddr = #{dbaddr,jdbcType=VARCHAR},
+      dbuser = #{dbuser,jdbcType=VARCHAR},
+      url = #{url,jdbcType=VARCHAR},
+      webuser = #{webuser,jdbcType=VARCHAR}
+    where _id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectByExampleWithRowbounds" parameterType="com.fogcoding.mybatis.model.test_envExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from test_env
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+</mapper>

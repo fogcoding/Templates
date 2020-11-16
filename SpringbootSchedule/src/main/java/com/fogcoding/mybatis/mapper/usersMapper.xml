@@ -1,0 +1,242 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fogcoding.mybatis.dao.usersMapper">
+  <resultMap id="BaseResultMap" type="com.fogcoding.mybatis.model.users">
+    <id column="_id" jdbcType="INTEGER" property="id" />
+    <result column="_account" jdbcType="VARCHAR" property="account" />
+    <result column="_name" jdbcType="VARCHAR" property="name" />
+    <result column="passwd" jdbcType="VARCHAR" property="passwd" />
+    <result column="user_group" jdbcType="VARCHAR" property="userGroup" />
+    <result column="authority_level" jdbcType="INTEGER" property="authorityLevel" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    _id, _account, _name, passwd, user_group, authority_level
+  </sql>
+  <select id="selectByExample" parameterType="com.fogcoding.mybatis.model.usersExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from users
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from users
+    where _id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from users
+    where _id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.fogcoding.mybatis.model.usersExample">
+    delete from users
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.fogcoding.mybatis.model.users">
+    insert into users (_id, _account, _name, 
+      passwd, user_group, authority_level
+      )
+    values (#{id,jdbcType=INTEGER}, #{account,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
+      #{passwd,jdbcType=VARCHAR}, #{userGroup,jdbcType=VARCHAR}, #{authorityLevel,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.fogcoding.mybatis.model.users">
+    insert into users
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        _id,
+      </if>
+      <if test="account != null">
+        _account,
+      </if>
+      <if test="name != null">
+        _name,
+      </if>
+      <if test="passwd != null">
+        passwd,
+      </if>
+      <if test="userGroup != null">
+        user_group,
+      </if>
+      <if test="authorityLevel != null">
+        authority_level,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="account != null">
+        #{account,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="passwd != null">
+        #{passwd,jdbcType=VARCHAR},
+      </if>
+      <if test="userGroup != null">
+        #{userGroup,jdbcType=VARCHAR},
+      </if>
+      <if test="authorityLevel != null">
+        #{authorityLevel,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.fogcoding.mybatis.model.usersExample" resultType="java.lang.Long">
+    select count(*) from users
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update users
+    <set>
+      <if test="record.id != null">
+        _id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.account != null">
+        _account = #{record.account,jdbcType=VARCHAR},
+      </if>
+      <if test="record.name != null">
+        _name = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.passwd != null">
+        passwd = #{record.passwd,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userGroup != null">
+        user_group = #{record.userGroup,jdbcType=VARCHAR},
+      </if>
+      <if test="record.authorityLevel != null">
+        authority_level = #{record.authorityLevel,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update users
+    set _id = #{record.id,jdbcType=INTEGER},
+      _account = #{record.account,jdbcType=VARCHAR},
+      _name = #{record.name,jdbcType=VARCHAR},
+      passwd = #{record.passwd,jdbcType=VARCHAR},
+      user_group = #{record.userGroup,jdbcType=VARCHAR},
+      authority_level = #{record.authorityLevel,jdbcType=INTEGER}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.fogcoding.mybatis.model.users">
+    update users
+    <set>
+      <if test="account != null">
+        _account = #{account,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        _name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="passwd != null">
+        passwd = #{passwd,jdbcType=VARCHAR},
+      </if>
+      <if test="userGroup != null">
+        user_group = #{userGroup,jdbcType=VARCHAR},
+      </if>
+      <if test="authorityLevel != null">
+        authority_level = #{authorityLevel,jdbcType=INTEGER},
+      </if>
+    </set>
+    where _id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.fogcoding.mybatis.model.users">
+    update users
+    set _account = #{account,jdbcType=VARCHAR},
+      _name = #{name,jdbcType=VARCHAR},
+      passwd = #{passwd,jdbcType=VARCHAR},
+      user_group = #{userGroup,jdbcType=VARCHAR},
+      authority_level = #{authorityLevel,jdbcType=INTEGER}
+    where _id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectByExampleWithRowbounds" parameterType="com.fogcoding.mybatis.model.usersExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from users
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+</mapper>

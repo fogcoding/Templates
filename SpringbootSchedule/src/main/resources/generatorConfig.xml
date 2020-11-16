@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<generatorConfiguration>
+
+    <!--引入配置文件-->
+    <properties resource="application.properties"></properties>
+
+    <!-- 引入数据库驱动 -->
+<!--    <classPathEntry location="${jdbc.driverClassLocation}"/>-->
+
+    <context id="DB2Tables" targetRuntime="MyBatis3">
+        <!-- 生成mysql带有分页的sql的插件  这个可以自己写，-->
+        <plugin type="org.mybatis.generator.plugins.ToStringPlugin" />
+        <plugin type="org.mybatis.generator.plugins.SerializablePlugin" />
+        <plugin type="org.mybatis.generator.plugins.MapperAnnotationPlugin" />
+        <plugin type="org.mybatis.generator.plugins.RowBoundsPlugin" />
+
+<!--        &lt;!&ndash; 通用mapper插件 &ndash;&gt;-->
+<!--        <plugin type="tk.mybatis.mapper.generator.MapperPlugin">-->
+<!--            &lt;!&ndash; 此处的 MyMapper注意一定不能被扫描到&ndash;&gt;-->
+<!--            <property name="mappers" value="${generator.mappers}"/>-->
+<!--            &lt;!&ndash; caseSensitive 是否区分大小写，默认值 false。如果数据库区分大小写，这里就需要配置为 true，这样当表名为 USER 时，-->
+<!--             会生成 @Table(name = "USER") 注解，否则使用小写 user 时会找不到表。&ndash;&gt;-->
+<!--            <property name="caseSensitive" value="true"/>-->
+<!--            &lt;!&ndash;forceAnnotation 是否强制生成注解，默认 false，如果设置为 true，不管数据库名和字段名是否一致，都会生成注解（包含 @Table 和 @Column）。&ndash;&gt;-->
+<!--            <property name="forceAnnotation" value="true"/>-->
+<!--        </plugin>-->
+
+
+        <!-- 自定义的注释规则，继承 DefaultCommentGenerator 重写 一些方法 -->
+        <commentGenerator type="com.fogcoding.NewbatisGenerator">
+            <!-- 是否去除自动生成日期的注释 true：是 ： false:否 -->
+            <property name="suppressDate" value="true"/>
+            <!-- 是否去除所有自动生成的注释 true：是 ： false:否 -->
+            <property name="suppressAllComments" value="true"/>
+        </commentGenerator>
+        <jdbcConnection driverClass="com.mysql.jdbc.Driver" connectionURL="jdbc:mysql://localhost:3306/fog?useUnicode=true"
+                        userId="root"
+                        password="123456">
+        </jdbcConnection>
+        <!--生成entity类存放位置-->
+        <javaModelGenerator targetPackage="com.fogcoding.mybatis.model" targetProject="D:\workspace\Templates\SpringbootSchedule\src\main\java">
+            <property name="enableSubPackages" value="true"/>
+            <property name="trimStrings" value="true"/>
+        </javaModelGenerator>
+        <!--生成映射文件存放位置-->
+        <sqlMapGenerator targetPackage="com.fogcoding.mybatis.mapper" targetProject="D:\workspace\Templates\SpringbootSchedule\src\main\java">
+            <property name="enableSubPackages" value="true"/>
+        </sqlMapGenerator>
+        <!--生成Dao类存放位置-->
+        <javaClientGenerator type="XMLMAPPER" targetPackage="com.fogcoding.mybatis.dao"
+                             targetProject="D:\workspace\Templates\SpringbootSchedule\src\main\java">
+            <property name="enableSubPackages" value="true"/>
+        </javaClientGenerator>
+        <table tableName="batch" domainObjectName="batch"/>
+        <table tableName="test_env" domainObjectName="test_env"/>
+        <table tableName="users" domainObjectName="users"/>
+    </context>
+</generatorConfiguration>

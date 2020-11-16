@@ -1,0 +1,352 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fogcoding.mybatis.dao.batchMapper">
+  <resultMap id="BaseResultMap" type="com.fogcoding.mybatis.model.batch">
+    <id column="_id" jdbcType="INTEGER" property="id" />
+    <result column="_env" jdbcType="VARCHAR" property="env" />
+    <result column="_sys" jdbcType="VARCHAR" property="sys" />
+    <result column="_pre_date" jdbcType="DATE" property="preDate" />
+    <result column="_after_date" jdbcType="DATE" property="afterDate" />
+    <result column="_requester" jdbcType="VARCHAR" property="requester" />
+    <result column="_request_content" jdbcType="VARCHAR" property="requestContent" />
+    <result column="_run_date" jdbcType="DATE" property="runDate" />
+    <result column="_run_time" jdbcType="VARCHAR" property="runTime" />
+    <result column="_finish_time" jdbcType="TIMESTAMP" property="finishTime" />
+    <result column="_operator" jdbcType="VARCHAR" property="operator" />
+    <result column="_notice" jdbcType="VARCHAR" property="notice" />
+    <result column="_state" jdbcType="VARCHAR" property="state" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    _id, _env, _sys, _pre_date, _after_date, _requester, _request_content, _run_date, 
+    _run_time, _finish_time, _operator, _notice, _state
+  </sql>
+  <select id="selectByExample" parameterType="com.fogcoding.mybatis.model.batchExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from batch
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from batch
+    where _id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from batch
+    where _id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.fogcoding.mybatis.model.batchExample">
+    delete from batch
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.fogcoding.mybatis.model.batch">
+    insert into batch (_id, _env, _sys, 
+      _pre_date, _after_date, _requester, 
+      _request_content, _run_date, _run_time, 
+      _finish_time, _operator, _notice, 
+      _state)
+    values (#{id,jdbcType=INTEGER}, #{env,jdbcType=VARCHAR}, #{sys,jdbcType=VARCHAR}, 
+      #{preDate,jdbcType=DATE}, #{afterDate,jdbcType=DATE}, #{requester,jdbcType=VARCHAR}, 
+      #{requestContent,jdbcType=VARCHAR}, #{runDate,jdbcType=DATE}, #{runTime,jdbcType=VARCHAR}, 
+      #{finishTime,jdbcType=TIMESTAMP}, #{operator,jdbcType=VARCHAR}, #{notice,jdbcType=VARCHAR}, 
+      #{state,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.fogcoding.mybatis.model.batch">
+    insert into batch
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        _id,
+      </if>
+      <if test="env != null">
+        _env,
+      </if>
+      <if test="sys != null">
+        _sys,
+      </if>
+      <if test="preDate != null">
+        _pre_date,
+      </if>
+      <if test="afterDate != null">
+        _after_date,
+      </if>
+      <if test="requester != null">
+        _requester,
+      </if>
+      <if test="requestContent != null">
+        _request_content,
+      </if>
+      <if test="runDate != null">
+        _run_date,
+      </if>
+      <if test="runTime != null">
+        _run_time,
+      </if>
+      <if test="finishTime != null">
+        _finish_time,
+      </if>
+      <if test="operator != null">
+        _operator,
+      </if>
+      <if test="notice != null">
+        _notice,
+      </if>
+      <if test="state != null">
+        _state,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="env != null">
+        #{env,jdbcType=VARCHAR},
+      </if>
+      <if test="sys != null">
+        #{sys,jdbcType=VARCHAR},
+      </if>
+      <if test="preDate != null">
+        #{preDate,jdbcType=DATE},
+      </if>
+      <if test="afterDate != null">
+        #{afterDate,jdbcType=DATE},
+      </if>
+      <if test="requester != null">
+        #{requester,jdbcType=VARCHAR},
+      </if>
+      <if test="requestContent != null">
+        #{requestContent,jdbcType=VARCHAR},
+      </if>
+      <if test="runDate != null">
+        #{runDate,jdbcType=DATE},
+      </if>
+      <if test="runTime != null">
+        #{runTime,jdbcType=VARCHAR},
+      </if>
+      <if test="finishTime != null">
+        #{finishTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="operator != null">
+        #{operator,jdbcType=VARCHAR},
+      </if>
+      <if test="notice != null">
+        #{notice,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null">
+        #{state,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.fogcoding.mybatis.model.batchExample" resultType="java.lang.Long">
+    select count(*) from batch
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update batch
+    <set>
+      <if test="record.id != null">
+        _id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.env != null">
+        _env = #{record.env,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sys != null">
+        _sys = #{record.sys,jdbcType=VARCHAR},
+      </if>
+      <if test="record.preDate != null">
+        _pre_date = #{record.preDate,jdbcType=DATE},
+      </if>
+      <if test="record.afterDate != null">
+        _after_date = #{record.afterDate,jdbcType=DATE},
+      </if>
+      <if test="record.requester != null">
+        _requester = #{record.requester,jdbcType=VARCHAR},
+      </if>
+      <if test="record.requestContent != null">
+        _request_content = #{record.requestContent,jdbcType=VARCHAR},
+      </if>
+      <if test="record.runDate != null">
+        _run_date = #{record.runDate,jdbcType=DATE},
+      </if>
+      <if test="record.runTime != null">
+        _run_time = #{record.runTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.finishTime != null">
+        _finish_time = #{record.finishTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.operator != null">
+        _operator = #{record.operator,jdbcType=VARCHAR},
+      </if>
+      <if test="record.notice != null">
+        _notice = #{record.notice,jdbcType=VARCHAR},
+      </if>
+      <if test="record.state != null">
+        _state = #{record.state,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update batch
+    set _id = #{record.id,jdbcType=INTEGER},
+      _env = #{record.env,jdbcType=VARCHAR},
+      _sys = #{record.sys,jdbcType=VARCHAR},
+      _pre_date = #{record.preDate,jdbcType=DATE},
+      _after_date = #{record.afterDate,jdbcType=DATE},
+      _requester = #{record.requester,jdbcType=VARCHAR},
+      _request_content = #{record.requestContent,jdbcType=VARCHAR},
+      _run_date = #{record.runDate,jdbcType=DATE},
+      _run_time = #{record.runTime,jdbcType=VARCHAR},
+      _finish_time = #{record.finishTime,jdbcType=TIMESTAMP},
+      _operator = #{record.operator,jdbcType=VARCHAR},
+      _notice = #{record.notice,jdbcType=VARCHAR},
+      _state = #{record.state,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.fogcoding.mybatis.model.batch">
+    update batch
+    <set>
+      <if test="env != null">
+        _env = #{env,jdbcType=VARCHAR},
+      </if>
+      <if test="sys != null">
+        _sys = #{sys,jdbcType=VARCHAR},
+      </if>
+      <if test="preDate != null">
+        _pre_date = #{preDate,jdbcType=DATE},
+      </if>
+      <if test="afterDate != null">
+        _after_date = #{afterDate,jdbcType=DATE},
+      </if>
+      <if test="requester != null">
+        _requester = #{requester,jdbcType=VARCHAR},
+      </if>
+      <if test="requestContent != null">
+        _request_content = #{requestContent,jdbcType=VARCHAR},
+      </if>
+      <if test="runDate != null">
+        _run_date = #{runDate,jdbcType=DATE},
+      </if>
+      <if test="runTime != null">
+        _run_time = #{runTime,jdbcType=VARCHAR},
+      </if>
+      <if test="finishTime != null">
+        _finish_time = #{finishTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="operator != null">
+        _operator = #{operator,jdbcType=VARCHAR},
+      </if>
+      <if test="notice != null">
+        _notice = #{notice,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null">
+        _state = #{state,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where _id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.fogcoding.mybatis.model.batch">
+    update batch
+    set _env = #{env,jdbcType=VARCHAR},
+      _sys = #{sys,jdbcType=VARCHAR},
+      _pre_date = #{preDate,jdbcType=DATE},
+      _after_date = #{afterDate,jdbcType=DATE},
+      _requester = #{requester,jdbcType=VARCHAR},
+      _request_content = #{requestContent,jdbcType=VARCHAR},
+      _run_date = #{runDate,jdbcType=DATE},
+      _run_time = #{runTime,jdbcType=VARCHAR},
+      _finish_time = #{finishTime,jdbcType=TIMESTAMP},
+      _operator = #{operator,jdbcType=VARCHAR},
+      _notice = #{notice,jdbcType=VARCHAR},
+      _state = #{state,jdbcType=VARCHAR}
+    where _id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectByExampleWithRowbounds" parameterType="com.fogcoding.mybatis.model.batchExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from batch
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+</mapper>
